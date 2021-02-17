@@ -28,11 +28,11 @@ router.get('/' , async (req,res)=>{
         query = query.gte('publishDate', req.query.publishedAfter)
     }
       //new route
-    if(req.query.author !=null && req.query.author != ' '){
+    //if(req.query.author !=null && req.query.author != ' '){
         
-        let authorID = await Author.find({'name':new RegExp(req.query.author,'i')})
-        console.log(authorID)
-    }
+       // let authorID = await Author.find({'name':new RegExp(req.query.author,'i')})
+     //   console.log(authorID)
+    //}
     //
     try{
         const books = await query.exec()
