@@ -44,12 +44,12 @@ router.get('/' , async (req,res)=>{
 })
 
 //New
-router.get('/new', (req,res) => {
+router.get('/new', async (req,res) => {
     rendernewPage(res,new Book())
 })
 
 //Create
-router.post('/' , upload.single.('cover'), async (req,res) =>{
+router.post('/' , upload.single('cover') , async (req,res) =>{
     const filename=req.file !=null ? req.file.filename:null
     const book = new Book({
         title:req.body.title,
