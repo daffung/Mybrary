@@ -6,7 +6,7 @@ const fs = require('fs')
 
 const Book = require('../models/book')
 const Author = require('../models/author')
-const UploadPath = path.join('public', Book.coverImagePath)
+const UploadPath = path.join('public', Book.coverImageBasePath)
 const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif']
 const upload = multer({
     dest: UploadPath,
@@ -37,7 +37,7 @@ router.get('/' , async (req,res)=>{
     try{
         const books = await query.exec()
         
-        res.render('books/index',{books:books, searchOption:req.query} )
+        res.render('books/index',{books:books, searchOptions:req.query} )
     }catch{
         res.redirect('/')
     }
