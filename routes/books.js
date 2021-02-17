@@ -8,7 +8,7 @@ const Book = require('../models/book')
 const Author = require('../models/author')
 const UploadPath = path.join('public', Book.coverImagePath)
 const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif']
-const upload=multer({
+const upload = multer({
     dest: UploadPath,
     fileFilter:function(req,file,callback){
         callback(null,imageMimeTypes.includes(file.mimetype))
@@ -26,10 +26,11 @@ router.get('/' , async (req,res)=>{
       }
     if (req.query.publishedAfter != null && req.query.publishedAfter != '') {
         query = query.gte('publishDate', req.query.publishedAfter)
+    }
       //new route
     if(req.query.author !=null && req.query.author != ' '){
         
-        let authorID = await Author.find({'name':new RegExp(req.query.author,'i')})._id
+        let authorID = await Author.find({'name':new RegExp(req.query.author,'i')})
         console.log(authorID)
     }
     //
@@ -41,13 +42,14 @@ router.get('/' , async (req,res)=>{
         res.redirect('/')
     }
 })
+
 //New
 router.get('/new', (req,res) => {
     rendernewPage(res,new Book())
 })
 
 //Create
-router.post('/' ,  upload.single.('cover'), async (req,res) =>{
+router.post('/' , upload.single.('cover'), async (req,res) =>{
     const filename=req.file !=null ? req.file.filename:null
     const book = new Book({
         title:req.body.title,
