@@ -78,8 +78,12 @@ async function rendernewPage(res,book,hasError=false)
 {
     try{
         const authors = await Author.find({})
-        if(hasError) errorMessage="Error Creating Book"
-        res.render('books/new' , {book:book , authors:authors, errorMessage:errorMessage}) 
+        const params={
+            authors:authors,
+            book:book
+        }
+        if(hasError) params.errorMessage="Error Creating Book"
+        res.render('books/new' ,params) 
     }catch{
         res.redirect('/books')
     }
