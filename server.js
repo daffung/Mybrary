@@ -11,7 +11,7 @@ const bodyParser = require('body-parser')
 
 const indexRoutes = require('./routes/index')
 const authorRoutes = require('./routes/author')
-const bookRoutes = require('./routes/books')
+const bookRoutes = require('./routes/book')
 
 app.set('view engine','ejs')
 app.set('views',__dirname + '/views')
