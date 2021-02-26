@@ -32,15 +32,11 @@ router.get('/', async (req, res) => {
   if (req.query.author != null && req.query.author != '') {
     
     let authorArr = await Author.find({'name':new RegExp(req.query.author, 'i')})
-    //console.log(authorArr)
-    //console.log(authorArr.length)
+    
     for (let i=0;i<authorArr.length;i++){
       var bookItem = await Book.find({'author':authorArr[i].id})
-      //console.log(bookItem)
-      bookArr = bookArr.concat(bookItem)
-      
-    }
-    
+      bookArr = bookArr.concat(bookItem)      
+    } 
   }
   //
   try {
@@ -117,8 +113,8 @@ async function renderNewPage(res, book, hasError = false) {
 }
 function uniQue(arr) {
   var newArr = []
-  for (var i  = 0; i < arr.length-1; i++){
-    for (var j = i+1; j < arr.length; j++) {
+  for (let i  = 0; i < arr.length-1; i++){
+    for (let j = i+1; j < arr.length; j++) {
       if (arr[i].id == arr[j].id) {
         newArr.push(arr[i])
       }
